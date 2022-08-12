@@ -1,0 +1,47 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+df = pd.read_csv(r'C:\Anil\Projects\DS Training\placement.csv')
+df.head()
+
+import warnings
+warnings.filterwarnings('ignore')
+plt.figure(figsize=(32,5))
+plt.subplot(1,2,1)
+sns.distplot(df['mba_p'])
+plt.subplot(1,2,2)
+sns.distplot(df['degree_p'])
+plt.show()
+
+plt.subplot(1,2,1)
+sns.distplot(df['ssc_p'])
+plt.show()
+plt.subplot(1,2,2)
+sns.distplot(df['salary'])
+plt.show()
+
+print("Highest allowed",df['salary'].mean() + 3*df['salary'].std())
+print("Lowest allowed",df['salary'].mean() - 3*df['salary'].std())
+
+
+#Trimming
+
+df[(df['salary'] > 569027) | (df['salary'] < 8283.048)]
+new_df = df[(df['salary'] < 569027) | (df['salary'] > 8283.048)]
+
+
+#Capping
+
+upper_limit = df['salary'].mean() + 3*df['salary'].std()
+lower_limit = df['salary'].mean() - 3*df['salary'].std()
+df['salary'] = np.where(
+    df['salary']>upper_limit,
+    upper_limit,
+    np.where(
+        df['salary']<lower_limit,
+        lower_limit,
+        df['salary']
+    )
+)
