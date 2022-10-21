@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html >
+<head>
+  <link rel="icon" href="data:,">
+  <meta charset="UTF-8">
+  <title>ML Deployment</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  
+</head>
+<body background="wp4012092.jpg"><br>   
+ <div class="login">
+	<h1>Predict Cricket Score</h1>
+	
+
+     <!-- Main Input For Receiving Query to our ML -->
+    <form action="{{ url_for('predict')}}"method="post">
+    	 
+    	<input type="text" name="runs" placeholder="Runs" required="required" />
+        <input type="text" name="wicket" placeholder="Wicket" required="required" />
+		<input type="text" name="overs" placeholder="Overs" required="required" />
+		<input type="text" name="striker" placeholder="Striker" required="required" />
+		<input type="text" name="non_striker" placeholder="Non Striker" required="required" />
+
+        <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+    </form>
+
+   <br>
+   <br>
+   {{ prediction_text }}
+ </div>
+</body>
+</html>
